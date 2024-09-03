@@ -31,4 +31,4 @@ distribute:
 
 # Build the HTML documentation using Sphinx
 html:
-	sphinx-build -b html source docs/build/html
+	sphinx-build -M html docs/source/ docs/build/
