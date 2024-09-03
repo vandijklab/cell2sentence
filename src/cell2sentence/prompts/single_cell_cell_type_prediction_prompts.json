@@ -1,0 +1,22 @@
+{
+    "model_input": [
+        "The following is a list of {num_genes} gene names ordered by descending expression level in a {organism} cell. Your task is to give the cell type which this cell belongs to based on its gene expression.\nCell sentence: {cell_sentence}.\nThe cell type corresponding to these genes is:",
+        "Below is a list of {num_genes} gene names in order of descending expression level from a {organism} cell. Based on this, predict what the cell type of this cell is.\nCell sentence: {cell_sentence}.\nThese genes are most likely associated with cell type:",
+        "Given the list of {num_genes} gene names ordered by descending expression level from a {organism} cell, identify the cell type.\nCell sentence: {cell_sentence}.\nThe probable cell type for these genes is:",
+        "Analyze the following list of {num_genes} genes sorted by decreasing expression levels in a {organism} cell and determine its cell type.\nCell sentence: {cell_sentence}.\nBased on these genes, the corresponding cell type is:",
+        "From the list of {num_genes} gene names ordered by decreasing expression level in a {organism} cell, infer the cell type of the cell.\nCell sentence: {cell_sentence}.\nThese genes suggest the cell type is most likely:",
+        "The {num_genes} gene names below are listed by descending expression level in a {organism} cell. Predict the cell type based on this information.\nCell sentence: {cell_sentence}.\nThese genes are indicative of cell type:",
+        "Below is a list of {num_genes} gene names sorted by descending expression in a {organism} cell. Determine the cell type of this cell from its expressed genes.\nCell sentence: {cell_sentence}.\nThe associated cell type for these genes appears to be:",
+        "The following list contains {num_genes} gene names ordered by descending expression level in a {organism} cell. Deduce the cell type based on this.\nCell sentence: {cell_sentence}.\nThese genes typically correspond to cell type:",
+        "Here is a list of {num_genes} genes in order of descending expression level from a {organism} cell. Identify the cell type of this cell based on this information.\nCell sentence: {cell_sentence}.\nThe expected cell type based on these genes is:",
+        "Examine the list of {num_genes} gene names sorted by decreasing expression in a {organism} cell, and from this, identify its cell type.\nCell sentence: {cell_sentence}.\nThese genes are commonly found in cell type:",
+        "The {num_genes} gene names below are arranged by descending expression level in a {organism} cell. Determine the cell type of this cell.\nCell sentence: {cell_sentence}.\nThe cell type that these genes are most commonly linked with is:",
+        "Here is a list of {num_genes} genes ordered by expression level in a {organism} cell. Based on this information, identify the cell type.\nCell sentence: {cell_sentence}.\nBased on the expression levels, the cell type would likely be:",
+        "From the list of {num_genes} gene names sorted by decreasing expression levels in a {organism} cell, predict the cell type.\nCell sentence: {cell_sentence}.\nThe genes provided are most commonly expressed in cell type:",
+        "Below is a list of {num_genes} genes ordered by descending expression in a {organism} cell. Use this information to determine the cell type.\nCell sentence: {cell_sentence}.\nThese genes suggest the cell type is most likely:",
+        "The {num_genes} gene names below are listed by descending expression levels in a {organism} cell. Based on this, predict the cell type.\nCell sentence: {cell_sentence}.\nThe cell type corresponding to these genes is:"
+    ],
+    "response": [
+        "{cell_type}."
+    ]
+}

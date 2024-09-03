@@ -1,0 +1,17 @@
+{
+    "model_input": [
+        "Generate a list of {num_genes} genes in order of descending expression which represent a {organism} cell of cell type {cell_type}.\nCell sentence:",
+        "Produce a list of {num_genes} gene names in descending order of expression which represent the expressed genes of a {organism} {cell_type} cell.\nCell sentence:",
+        "Create a ranked list of {num_genes} genes in decreasing order of expression representing {organism} cell of cell type {cell_type}.\nCell sentence:",
+        "List the top {num_genes} expressed genes for a {organism} cell with cell type {cell_type}.\nCell sentence:",
+        "Identify the highest expressed {num_genes} genes in decreasing order of expression in a {organism} {cell_type} cell.\nCell sentence:",
+        "Enumerate a list of {num_genes} genes in descending order of expression in a {organism} {cell_type} cell.\nCell sentence:",
+        "Compile a descending order list of {num_genes} expressed genes in a {organism} {cell_type} cell.\nCell sentence:",
+        "Present a sequence of {num_genes} genes ordered by decreasing expression level in a {organism} {cell_type} cell.\nCell sentence:",
+        "Generate an ordered list of {num_genes} genes by decreasing expression level in a {organism} {cell_type} cell.\nCell sentence:",
+        "Assemble a list of {num_genes} genes from highest to lowest expression in a {organism} {cell_type} cell.\nCell sentence:"
+    ],
+    "response": [
+        "{cell_sentence}."
+    ]
+}
