@@ -13,7 +13,7 @@ expression into cell sentences, which are sentences of space-separated gene name
 sentences, C2S provides a framework for LLMs to directly model single-cell biology in natural language, enabling diverse capabilities on multiple single-cell
 tasks.
 
-For more information, please refer to the manuscript, or feel free to reach out to us at [van Dijk Lab](https://www.vandijklab.org/)!
+For more information, please refer to the manuscript, checkout the [documentation](https://vandijklab-cell2sentence.readthedocs.io/), or feel free to reach out to us at [van Dijk Lab](https://www.vandijklab.org/)!
 
 
 ## News
@@ -66,7 +66,7 @@ Detailed instructions for installing flash-attention can be found in the officia
 
 ## Tutorials
 
-The following notebooks provide guides on common workflows with C2S models.
+The following notebooks provide guides on common workflows with C2S models. For more information about specific functions and modules, check out the [official C2S documentation page](https://vandijklab-cell2sentence.readthedocs.io/).
 
 | Notebook | Description                                             |
 ----------|---------------------------------------------------------|
@@ -75,7 +75,7 @@ The following notebooks provide guides on common workflows with C2S models.
 | [c2s_tutorial_2_cell_embedding.ipynb](tutorials/c2s_tutorial_2_cell_embedding.ipynb) | Obtaining cell type embeddings with C2S models
 | [c2s_tutorial_3_finetuning_on_new_datasets.ipynb](tutorials/c2s_tutorial_3_finetuning_on_new_datasets.ipynb) | Finetuning C2S models on new datasets
 | [c2s_tutorial_4_cell_type_prediction.ipynb](tutorials/c2s_tutorial_4_cell_type_prediction.ipynb) | Cell type prediction using C2S models
-| [c2s_tutorial_5_cell_type_generation.ipynb](tutorials/c2s_tutorial_5_cell_type_generation.ipynb) | Cell generation conditioned on cell type
+| [c2s_tutorial_5_cell_generation.ipynb](tutorials/c2s_tutorial_5_cell_generation.ipynb) | Cell generation conditioned on cell type
 | [c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb](tutorials/c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb) | Cell type annotation with foundation model
 
 
