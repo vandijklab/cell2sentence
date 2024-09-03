@@ -33,3 +33,11 @@ sphinx:
 # python:
 #   install:
 #     - requirements: docs/requirements.txt
+
+# Declare the Python requirements required to build your documentation
+python:
+  install:
+    - method: pip
+      path: .
+    - requirements:
+        - sphinx_rtd_theme
