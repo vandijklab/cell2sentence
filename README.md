@@ -18,6 +18,10 @@ For more information, please refer to the manuscript, or feel free to reach out 
 
 ## News
 
+🎉 (09/03/2024) We release the new C2S code base, with core functionalities for working with C2S models in common single-cell workflows!
+
+🎉 (09/03/2024) We release a new suite of Pythia models for cell type prediction, cell type conditioned generation, and a diverse multi-cell multi-task model! These models are trained on over 57 million human and mouse cells from CellxGene and Human Cell Atlas.
+
 🎉 (05/01/2024) Cell2Sentence was accepted to ICML 2024! Congratulations to all of the authors involved in the project. See you in Vienna!
 
 🎉 (02/15/2024) **pythia-160m-c2s** trained on full cell sentences is available on the Hugging Face hub [here](https://huggingface.co/vandijklab/pythia-160m-c2s)! This new model generates and predicts cell types from entire cells directly in text with the [Pythia-160 base model](https://huggingface.co/EleutherAI/pythia-160m).
@@ -29,7 +33,7 @@ For more information, please refer to the manuscript, or feel free to reach out 
 
 To set up a cell2sentence environment, first pull the repository locally:
 ```bash
-git clone https://github.com/SyedA5688/cell2sentence.git
+git clone https://github.com/vandijklab/cell2sentence.git
 ```
 
 Navigate a terminal into the root of the repository. Next, create an Anaconda environment using `python3` using [anaconda](https://docs.anaconda.com/anaconda/install/) with:
@@ -83,9 +87,9 @@ each explain which model they use.
 
 | Model name | Task(s)                   | Training Data                         |
 ----------|---------------------------------------------------------|------|
-| C2S-Pythia-410M cell type prediction model | Next gene prediction, cell type prediction | CellxGene, HCA, cell type annotations
-| C2S-Pythia-410M conditional single cell generation model | Next gene prediction, cell type conditioned single-cell generation | CellxGene, HCA, cell type annotations
-| C2S-Pythia-410M diverse single- and multi-cell tasks model | Next gene prediction, diverse single- and multi-cell prediction and generation tasks | CellxGene, HCA, cell type and tissue annotations, paper abstracts
+| [C2S-Pythia-410M cell type prediction model](https://huggingface.co/vandijklab/C2S-Pythia-410m-cell-type-prediction) | Next gene prediction, cell type prediction | CellxGene, HCA, cell type annotations
+| [C2S-Pythia-410M cell type conditioned single cell generation model](https://huggingface.co/vandijklab/C2S-Pythia-410m-cell-type-conditioned-cell-generation) | Next gene prediction, cell type conditioned single-cell generation | CellxGene, HCA, cell type annotations
+| [C2S-Pythia-410M diverse single- and multi-cell tasks model](https://huggingface.co/vandijklab/C2S-Pythia-410m-diverse-single-and-multi-cell-tasks) | Next gene prediction, diverse single- and multi-cell prediction and generation tasks | CellxGene, HCA, cell type and tissue annotations, paper abstracts
 | [C2S-Pythia-160M full cell generation (legacy)](https://huggingface.co/vandijklab/pythia-160m-c2s) | Next gene prediction, cell type prediction | Immune tissue ([Domínguez Conde et al.](https://www.science.org/doi/full/10.1126/science.abl5197)), cell type annotations
 | GPT-2 Large foundation model (legacy) | Next gene prediction, cell type prediction, conditional single-cell generation | CellxGene, HCA, cell type and tissue annotations, paper abstracts
 

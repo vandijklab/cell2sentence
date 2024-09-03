@@ -8,7 +8,7 @@ To set up a cell2sentence environment, first pull the repository locally:
 
 .. code-block:: console
 
-   git clone https://github.com/SyedA5688/cell2sentence.git
+   git clone https://github.com/vandijklab/cell2sentence.git
 
 Navigate a terminal into the root of the repository. Next, create an Anaconda environment using python3 using anaconda with:
 
