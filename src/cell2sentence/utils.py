@@ -208,8 +208,8 @@ def benchmark_expression_conversion(
     plot = (
         pn.ggplot(benchmark_df, pn.aes(x=x, y=y))
         + pn.geom_abline(
-            slope=linear_reg.coef_,
-            intercept=linear_reg.intercept_,
+            slope=linear_reg.coef_[0],  # Use the first element directly
+            intercept=linear_reg.intercept_,  # Use directly
             color="darkorange",
         )
         + pn.geom_point(color="blue", size=0.2)
@@ -275,18 +275,19 @@ def benchmark_expression_conversion(
         "x_axis": [x],
         "y_axis": [y],
         "threshold": [BASE10_THRESHOLD],
-        "slope": [linear_reg.coef_.item()],
-        "intercept": [linear_reg.intercept_.item()],
-        "r_squared": [r_squared_score.item()],
-        "pearson_r_statistic": [pearson_r_score.statistic.item()],
-        "pearson_r_pvalue": [pearson_r_score.pvalue.item()],
-        "spearman_r_statistic": [spearman_r_score.statistic.item()],
-        "spearman_r_pvalue": [spearman_r_score.pvalue.item()],
+        "slope": [linear_reg.coef_[0]],  # Use the first element directly
+        "intercept": [linear_reg.intercept_],  # Use directly
+        "r_squared": [r_squared_score],  # Directly use the float
+        "pearson_r_statistic": [pearson_r_score[0]],  # Use the first element directly
+        "pearson_r_pvalue": [pearson_r_score[1]],  # Use the second element directly
+        "spearman_r_statistic": [spearman_r_score[0]],  # Use the first element directly
+        "spearman_r_pvalue": [spearman_r_score[1]],  # Use the second element directly
     })
 
     # save benchmarking results
     benchmark_results_filepath = os.path.join(benchmark_save_dir, "c2s_transformation_metrics.csv")
     result_df.to_csv(benchmark_results_filepath, index=False)
+
 
 
 def build_arrow_dataset(
