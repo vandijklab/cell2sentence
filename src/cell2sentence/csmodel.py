@@ -10,10 +10,11 @@ Main model wrapper class definition
 import os
 import pickle
 from random import sample
+from typing import Optional
 
 # Third-party libraries
 import numpy as np
-from datasets import load_from_disk
+from datasets import load_from_disk, DatasetDict
 
 # Pytorch, Huggingface imports
 import torch
@@ -79,7 +80,8 @@ class CSModel():
         train_args: TrainingArguments, 
         loss_on_response_only: bool = True,
         top_k_genes: int = 100, 
-        max_eval_samples: int = 500
+        max_eval_samples: int = 500,
+        data_split_indices_dict: Optional[dict] = None,
     ):
         """
         Fine tune a model using the provided CSData object data
@@ -94,6 +96,10 @@ class CSModel():
             loss_on_response_only: whether to take loss only on model's answer
             top_k_genes: number of genes to use for each cell sentence
             max_eval_samples: number of samples to use for validation
+            data_split_indices_dict: dictionary of indices for train, val, and (optionally)
+                                    test set. Required keys are "train" and "val", value
+                                    should be a list of indices of samples in that data split.
+
         Return:
             None: an updated CSModel is generated in-place
         """
@@ -164,17 +170,26 @@ class CSModel():
         print(f"Starting training. Output directory: {output_dir}")
 
         # Perform dataset split
-        split_ds_dict, data_split_indices_dict = train_test_split_arrow_ds(formatted_hf_ds)
+        if data_split_indices_dict is None:
+            split_ds_dict, data_split_indices_dict = train_test_split_arrow_ds(formatted_hf_ds)
+        else:
+            # Dataset split indices supplied by user, split formatted arrow dataset accordingly
+            train_ds = formatted_hf_ds.select(data_split_indices_dict["train"])
+            val_ds = formatted_hf_ds.select(data_split_indices_dict["val"])
+            ds_dict_object = {
+                "train": train_ds,
+                "validation": val_ds,
+            }
+            split_ds_dict = DatasetDict(ds_dict_object)
         with open(os.path.join(output_dir, 'data_split_indices_dict.pkl'), 'wb') as f:
             pickle.dump(data_split_indices_dict, f)
         
         train_dataset = split_ds_dict["train"]
         eval_dataset = split_ds_dict["validation"]
-        if max_eval_samples is not None:
+        if (max_eval_samples is not None) and (max_eval_samples < eval_dataset.num_rows):
             sampled_eval_indices = sample(list(range(eval_dataset.num_rows)), k=max_eval_samples)
             sampled_eval_indices.sort()
             np.save(os.path.join(output_dir, 'sampled_eval_indices.npy'), np.array(sampled_eval_indices, dtype=np.int64))
-            eval_dataset = eval_dataset.select(sampled_eval_indices)
         
         # Define Trainer
         trainer = Trainer(
