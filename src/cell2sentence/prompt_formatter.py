@@ -1,5 +1,5 @@
 """
-Prompt formatting class definition.
+Prompt formatting class definitions.
 """
 
 #
@@ -9,7 +9,9 @@ Prompt formatting class definition.
 # Python built-in libraries
 import json
 import random
+from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import Optional
 
 # Third-party libraries
 from datasets import Dataset
@@ -21,7 +23,7 @@ SUPPORTED_TASKS = [
 ]
 
 
-def get_cell_sentence_str(ds_sample, num_genes: int = None):
+def get_cell_sentence_str(ds_sample, num_genes: Optional[int] = None):
     """
     Helper function for formatting cell sentences. Returns a cell sentence string containing
     a list of space-separated gene names. Caps number of genes at 'num_genes' if not None.
@@ -41,7 +43,25 @@ def get_cell_sentence_str(ds_sample, num_genes: int = None):
     return cell_sentence_str, num_genes_str
 
 
-class PromptFormatter():
+class PromptFormatter(ABC):
+    """
+    Abstract base class for prompt formatting.
+
+    Subclasses should implement the format_hf_ds method, which takes a Huggingface
+    dataset and formats it with any chosen prompts for the desired task. It should
+    return a new Huggingface dataset with at least the following columns:
+    - model_input: str, the formatted model input
+    - response: str, the formatted model response
+    These will be used by the tokenizer to format the data for the model.
+    """
+    
+    @abstractmethod
+    def format_hf_ds(self, hf_ds):
+        """Format a Huggingface dataset with prompts."""
+        pass
+
+
+class C2SPromptFormatter(PromptFormatter):
     """
     Wrapper class to abstract different types of input data that can be passed
     in cell2sentence based workflows.
@@ -49,8 +69,8 @@ class PromptFormatter():
 
     def __init__(self, task: str, top_k_genes: int, random_seed: int = 42):
         """
-        Core constructor: PromptFormatter loads prompts for the given task and
-        handles prompt formatting given a cell sentence dataset.
+        Loads prompts for standard C2S tasks and handles prompt formatting given
+        a cell sentence dataset.
 
         Arguments:
             task: task to format prompts for (options: 'cell_type_prediction', 'cell_type_generation').

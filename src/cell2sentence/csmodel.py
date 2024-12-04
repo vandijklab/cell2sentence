@@ -21,7 +21,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
 
 # Local imports
-from cell2sentence.prompt_formatter import PromptFormatter
+from cell2sentence.prompt_formatter import PromptFormatter, C2SPromptFormatter
 from cell2sentence.utils import train_test_split_arrow_ds, tokenize_all, tokenize_loss_on_response
 
 
@@ -82,6 +82,7 @@ class CSModel():
         top_k_genes: int = 100, 
         max_eval_samples: int = 500,
         data_split_indices_dict: Optional[dict] = None,
+        prompt_formatter: Optional[PromptFormatter] = None,
     ):
         """
         Fine tune a model using the provided CSData object data
@@ -91,14 +92,18 @@ class CSModel():
                     alternatively, data can be any generator of sequential
                     text that satisfies the same functional contract as
                     a CSData object
-            task: name of finetuning task (see supported tasks in prompt_formatter.py)
+            task: name of finetuning task (see supported tasks in prompt_formatter.py). Ignored
+                if prompt_formatter is not None.
             train_args: Huggingface Trainer arguments object
             loss_on_response_only: whether to take loss only on model's answer
-            top_k_genes: number of genes to use for each cell sentence
+            top_k_genes: number of genes to use for each cell sentence. Ignored if
+                prompt_formatter is not None.
             max_eval_samples: number of samples to use for validation
             data_split_indices_dict: dictionary of indices for train, val, and (optionally)
                                     test set. Required keys are "train" and "val", value
                                     should be a list of indices of samples in that data split.
+            prompt_formatter: optional custom PromptFormatter object. If None, a default one
+                            will be created using task and top_k_genes parameters.
 
         Return:
             None: an updated CSModel is generated in-place
@@ -110,7 +115,8 @@ class CSModel():
             raise NotImplementedError("Please use arrow backend implementation for training")
         
         # Define prompt formatter, format prompts
-        prompt_formatter = PromptFormatter(task=task, top_k_genes=top_k_genes)
+        if prompt_formatter is None:
+            prompt_formatter = C2SPromptFormatter(task=task, top_k_genes=top_k_genes)
         formatted_hf_ds = prompt_formatter.format_hf_ds(hf_ds)
 
         # Load model

@@ -14,7 +14,7 @@ from datasets import Dataset, load_from_disk
 
 # Local imports
 import cell2sentence as cs
-from cell2sentence.prompt_formatter import PromptFormatter
+from cell2sentence.prompt_formatter import C2SPromptFormatter
 
 HERE = Path(__file__).parent
 
@@ -58,7 +58,7 @@ class TestCellTypePredictionPromptFormattingOnImmuneCells:
         # Format prompts for cell type prediction
         task = "cell_type_prediction"
         top_k_genes = 10  # up to 10 genes
-        prompt_formatter = PromptFormatter(task=task, top_k_genes=top_k_genes)
+        prompt_formatter = C2SPromptFormatter(task=task, top_k_genes=top_k_genes)
         self.formatted_hf_ds = prompt_formatter.format_hf_ds(hf_ds)
         
     def test_formatted_hf_ds_created_correctly(self):
@@ -117,7 +117,7 @@ class TestCellConditionalGenerationPromptFormattingOnImmuneCells:
         # Format prompts for cell type prediction
         task = "cell_type_generation"
         top_k_genes = 10  # up to 10 genes
-        prompt_formatter = PromptFormatter(task=task, top_k_genes=top_k_genes)
+        prompt_formatter = C2SPromptFormatter(task=task, top_k_genes=top_k_genes)
         self.formatted_hf_ds = prompt_formatter.format_hf_ds(hf_ds)
         
     def test_formatted_hf_ds_columns_and_num_samples_are_correct(self):

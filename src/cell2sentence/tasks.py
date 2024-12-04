@@ -22,7 +22,7 @@ from datasets import load_from_disk
 # Local imports
 from cell2sentence.csdata import CSData
 from cell2sentence.csmodel import CSModel
-from cell2sentence.prompt_formatter import PromptFormatter
+from cell2sentence.prompt_formatter import C2SPromptFormatter
 
 
 def generate_cells_conditioned_on_cell_type(
@@ -54,7 +54,7 @@ def generate_cells_conditioned_on_cell_type(
         List of generated cells in the form of cell sentences
     """
     assert organism in ["Homo sapiens", "Mus musculus"], "Please specify 'Homo sapiens' or 'Mus musculus' as organism."
-    prompt_formatter = PromptFormatter(task="cell_type_generation", top_k_genes=n_genes)
+    prompt_formatter = C2SPromptFormatter(task="cell_type_generation", top_k_genes=n_genes)
 
     # Load model
     print("Reloading model from path on disk:", csmodel.save_path)
@@ -132,7 +132,7 @@ def predict_cell_types_of_data(
     hf_ds_dict = load_from_disk(csdata.data_path)
 
     # Format prompts
-    prompt_formatter = PromptFormatter(task="cell_type_prediction", top_k_genes=n_genes)
+    prompt_formatter = C2SPromptFormatter(task="cell_type_prediction", top_k_genes=n_genes)
     formatted_hf_ds = prompt_formatter.format_hf_ds(hf_ds_dict)
 
     # Predict cell types using trained C2S models
@@ -179,7 +179,7 @@ def embed_cells(
     hf_ds_dict = load_from_disk(csdata.data_path)
 
     # Format prompts
-    prompt_formatter = PromptFormatter(task="cell_type_prediction", top_k_genes=n_genes)
+    prompt_formatter = C2SPromptFormatter(task="cell_type_prediction", top_k_genes=n_genes)
     formatted_hf_ds = prompt_formatter.format_hf_ds(hf_ds_dict)
 
     # Predict cell types using trained C2S models
