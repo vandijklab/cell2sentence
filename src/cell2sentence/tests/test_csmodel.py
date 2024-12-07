@@ -26,8 +26,8 @@ class TestCSModelCellTypeConditionalGenerationWorkflow:
     @classmethod
     def setup_class(self):
         # Define CSModel object
-        cell_type_cond_generation_model_path = "/home/sr2464/palmer_scratch/C2S_Files_Syed/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_14-10-44_checkpoint-7000_cell_type_cond_generation"
-        self.save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing/csmodel_testing"
+        cell_type_cond_generation_model_path = "/home/sr2464/scratch/C2S_Files/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_14-10-44_checkpoint-7000_cell_type_cond_generation"
+        self.save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing/csmodel_testing"
         self.save_name = "cell_type_cond_generation_pythia_410M_1"
         self.csmodel = CSModel(
             model_name_or_path=cell_type_cond_generation_model_path,

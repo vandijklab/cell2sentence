@@ -31,7 +31,7 @@ class TestCellTypePredictionPromptFormattingOnImmuneCells:
     def setup_method(self):
         # Read in immune tissue data
         adata = sc.read_h5ad(HERE / 'immune_tissue_10cells.h5ad')
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing"
         save_name = "immune_tissue_10cells_csdata_arrow"
         
         # Define columns of adata.obs which we want to keep in cell sentence dataset
@@ -90,7 +90,7 @@ class TestCellConditionalGenerationPromptFormattingOnImmuneCells:
     def setup_method(self):
         # Read in dummy adata object
         adata = sc.read_h5ad(HERE / 'immune_tissue_10cells.h5ad')
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing"
         save_name = "immune_tissue_10cells_csdata_arrow"
         
         # Define columns of adata.obs which we want to keep in cell sentence dataset

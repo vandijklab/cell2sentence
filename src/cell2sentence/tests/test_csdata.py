@@ -33,7 +33,7 @@ class TestCoreWorkflowOnDummyAdata:
     def setup_method(self):
         # Read in dummy adata object
         adata = sc.read_csv(HERE / 'small_data.csv').T
-        self.save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing/small_data_HF_ds"
+        self.save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing/small_data_HF_ds"
         self.save_name = "test_csdata_arrow"
         
         # Create CSData object
@@ -90,7 +90,7 @@ class TestMultipleArrowDatasetWorkflowOnDummyAdata:
         # Read in multiple dummy adata objects
         adata1 = sc.read_csv(HERE / 'small_data.csv').T
         adata2 = sc.read_csv(HERE / 'small_data_diffgenes.csv').T
-        self.save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing/small_data_HF_ds"
+        self.save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing/small_data_HF_ds"
         self.save_name = "test_csdata_arrow"
         
         # Create CSData object
@@ -161,7 +161,7 @@ class TestCoreWorkflowOnImmuneTissueDataSubset:
         # Domínguez Conde, C., et al. "Cross-tissue immune cell analysis reveals tissue-specific 
         #  features in humans." Science 376.6594 (2022): ea
         adata = sc.read_h5ad(HERE / 'immune_tissue_10cells.h5ad')
-        self.save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing"
+        self.save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing"
         self.save_name = "immune_tissue_10cells_csdata_arrow"
         
         # Define columns of adata.obs which we want to keep in cell sentence dataset

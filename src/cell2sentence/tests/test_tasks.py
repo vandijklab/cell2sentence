@@ -30,8 +30,8 @@ class TestCellTypeConditionalGenerationTaskWorkflow:
     @classmethod
     def setup_class(self):
         # Define CSModel object
-        cell_type_cond_generation_model_path = "/home/sr2464/palmer_scratch/C2S_Files_Syed/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_14-10-44_checkpoint-7000_cell_type_cond_generation"
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing/csmodel_testing"
+        cell_type_cond_generation_model_path = "/home/sr2464/scratch/C2S_Files/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_14-10-44_checkpoint-7000_cell_type_cond_generation"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing/csmodel_testing"
         save_name = "cell_type_cond_generation_pythia_410M_1"
         csmodel = CSModel(
             model_name_or_path=cell_type_cond_generation_model_path,
@@ -74,8 +74,8 @@ class TestCellTypeConditionalGenerationOneCellTaskWorkflow:
     @classmethod
     def setup_class(self):
         # Define CSModel object
-        cell_type_cond_generation_model_path = "/home/sr2464/palmer_scratch/C2S_Files_Syed/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_14-10-44_checkpoint-7000_cell_type_cond_generation"
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing/csmodel_testing"
+        cell_type_cond_generation_model_path = "/home/sr2464/scratch/C2S_Files/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_14-10-44_checkpoint-7000_cell_type_cond_generation"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing/csmodel_testing"
         save_name = "cell_type_cond_generation_pythia_410M_1"
         csmodel = CSModel(
             model_name_or_path=cell_type_cond_generation_model_path,
@@ -119,7 +119,7 @@ class TestCellTypePredictionTaskWorkflow:
     def setup_class(self):
         # Define CSData object
         adata = sc.read_h5ad(HERE / 'immune_tissue_10cells.h5ad')
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing"
         save_name = "immune_tissue_10cells_csdata_arrow"
         
         # Define columns of adata.obs which we want to keep in cell sentence dataset
@@ -141,8 +141,8 @@ class TestCellTypePredictionTaskWorkflow:
         )
 
         # Define CSModel object
-        cell_type_prediction_model_path = "/home/sr2464/palmer_scratch/C2S_Files_Syed/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_13-55-51_checkpoint-7600_cell_type_pred"
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing/csmodel_testing"
+        cell_type_prediction_model_path = "/home/sr2464/scratch/C2S_Files/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_13-55-51_checkpoint-7600_cell_type_pred"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing/csmodel_testing"
         save_name = "cell_type_prediction_pythia_410M_1"
         csmodel = CSModel(
             model_name_or_path=cell_type_prediction_model_path,
@@ -177,7 +177,7 @@ class TestCellTypeEmbeddingWorkflow:
     def setup_class(self):
         # Define CSData object
         adata = sc.read_h5ad(HERE / 'immune_tissue_10cells.h5ad')
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing"
         save_name = "immune_tissue_10cells_csdata_arrow"
         
         # Define columns of adata.obs which we want to keep in cell sentence dataset
@@ -199,8 +199,8 @@ class TestCellTypeEmbeddingWorkflow:
         )
 
         # Define CSModel object
-        cell_type_prediction_model_path = "/home/sr2464/palmer_scratch/C2S_Files_Syed/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_13-55-51_checkpoint-7600_cell_type_pred"
-        save_dir = "/home/sr2464/palmer_scratch/C2S_Files_Syed/c2s_api_testing/csmodel_testing"
+        cell_type_prediction_model_path = "/home/sr2464/scratch/C2S_Files/multicell_pretraining_v2_important_models/pythia-410m-multicell_v2_2024-07-28_13-55-51_checkpoint-7600_cell_type_pred"
+        save_dir = "/home/sr2464/scratch/C2S_Files/c2s_api_testing/csmodel_testing"
         save_name = "cell_type_prediction_pythia_410M_1"
         csmodel = CSModel(
             model_name_or_path=cell_type_prediction_model_path,
