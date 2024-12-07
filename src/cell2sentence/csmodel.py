@@ -196,6 +196,8 @@ class CSModel():
             sampled_eval_indices = sample(list(range(eval_dataset.num_rows)), k=max_eval_samples)
             sampled_eval_indices.sort()
             np.save(os.path.join(output_dir, 'sampled_eval_indices.npy'), np.array(sampled_eval_indices, dtype=np.int64))
+            print(f"Selecting {max_eval_samples} samples of eval dataset to shorten validation loop.")
+            eval_dataset = eval_dataset.select(sampled_eval_indices)
         
         # Define Trainer
         trainer = Trainer(
