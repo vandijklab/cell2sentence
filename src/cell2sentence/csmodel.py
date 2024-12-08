@@ -84,6 +84,7 @@ class CSModel():
         data_split_indices_dict: Optional[dict] = None,
         prompt_formatter: Optional[PromptFormatter] = None,
         formatted_hf_ds: Optional[Dataset] = None,
+        num_proc: int = 3,
     ):
         """
         Fine tune a model using the provided CSData object data
@@ -108,6 +109,7 @@ class CSModel():
             formatted_hf_ds: optional Huggingface Dataset object containing formatted data, 
                             used in cases where custom formatting is desired (e.g. multicell
                             tasks where more complex formatting is needed).
+            num_proc: number of processes to use for tokenization. Defaults to 3.
         Return:
             None: an updated CSModel is generated in-place
         """
@@ -143,7 +145,7 @@ class CSModel():
             lambda batch: tokenization_function(batch, self.tokenizer),
             batched=True,
             load_from_cache_file=False,
-            num_proc=3,
+            num_proc=num_proc,
             batch_size=1000,
         )
 
