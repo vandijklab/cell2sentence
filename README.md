@@ -18,6 +18,8 @@ For more information, please refer to the manuscript, checkout the [documentatio
 
 ## News
 
+🎉 (12/08/2024) Added built-in support for finetuning on your own custom prompt templates as well as multi-cell prompt formatting! See tutorials 7 & 8 for examples.
+
 🎉 (09/03/2024) We release the new C2S code base, with core functionalities for working with C2S models in common single-cell workflows!
 
 🎉 (09/03/2024) We release a new suite of Pythia models for cell type prediction, cell type conditioned generation, and a diverse multi-cell multi-task model! These models are trained on over 57 million human and mouse cells from CellxGene and Human Cell Atlas.
@@ -100,7 +102,7 @@ each explain which model they use.
 - [x] Add prompt formatting, support for multiple tasks
 - [x] Add functionality for inverse reconstruction back to expression vectors
 - [x] Add tutorial notebooks for main C2S workflows: cell type prediction, cell generation
-- [ ] Add multi-cell prompt formatting
+- [x] Add multi-cell prompt formatting
 - [ ] Add support for legacy C2S-GPT-2 model prompts
 - [ ] Add parameter-efficient finetuning methods (LoRA)
 
