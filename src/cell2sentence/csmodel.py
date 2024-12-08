@@ -83,7 +83,7 @@ class CSModel():
         max_eval_samples: int = 500,
         data_split_indices_dict: Optional[dict] = None,
         prompt_formatter: Optional[PromptFormatter] = None,
-        multi_cell_indices_ds: Optional[Dataset] = None,
+        formatted_hf_ds: Optional[Dataset] = None,
     ):
         """
         Fine tune a model using the provided CSData object data
@@ -105,8 +105,9 @@ class CSModel():
                                     should be a list of indices of samples in that data split.
             prompt_formatter: optional custom PromptFormatter object. If None, a default one
                             will be created using task and top_k_genes parameters.
-            multi_cell_indices_ds: optional Dataset object containing multi-cell indices, for
-                                    multi-cell prompting.
+            formatted_hf_ds: optional Huggingface Dataset object containing formatted data, 
+                            used in cases where custom formatting is desired (e.g. multicell
+                            tasks where more complex formatting is needed).
         Return:
             None: an updated CSModel is generated in-place
         """
@@ -119,7 +120,9 @@ class CSModel():
         # Define prompt formatter, format prompts
         if prompt_formatter is None:
             prompt_formatter = C2SPromptFormatter(task=task, top_k_genes=top_k_genes)
-        formatted_hf_ds = prompt_formatter.format_hf_ds(hf_ds)
+        if formatted_hf_ds is None:
+            # If formatted dataset not supplied, format hf_ds using prompt_formatter
+            formatted_hf_ds = prompt_formatter.format_hf_ds(hf_ds)
 
         # Load model
         print("Reloading model from path on disk:", self.save_path)
