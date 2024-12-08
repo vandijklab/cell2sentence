@@ -21,6 +21,10 @@ SUPPORTED_TASKS = [
     "cell_type_prediction",
     "cell_type_generation",
 ]
+MULTICELL_SUPPORTED_TASKS = [
+    "tissue_prediction",
+    "tissue_conditional_generation",
+]
 
 
 def get_cell_sentence_str(ds_sample, num_genes: Optional[int] = None):
@@ -140,6 +144,101 @@ class C2SPromptFormatter(PromptFormatter):
         # Create formatted Huggingface dataset
         ds_split_dict = {
             "sample_type": [self.task] * hf_ds.num_rows,
+            "model_input": model_inputs_list,
+            "response": responses_list,
+        }
+        ds = Dataset.from_dict(ds_split_dict)
+        return ds
+
+
+class C2SMultiCellPromptFormatter(PromptFormatter):
+    """
+    Wrapper class for multi-cell prompt formatting.
+    """
+
+    def __init__(self, task: str, top_k_genes: int, random_seed: int = 42):
+        """
+        Loads prompts for standard C2S tasks and handles prompt formatting given
+        a cell sentence dataset.
+
+        Arguments:
+            task: task to format prompts for (options: 'cell_type_prediction', 'cell_type_generation').
+            top_k_genes: number of genes to use per cell sentence.
+            random_seed: random seed to control random number generation for reproducibility.
+        """
+        assert task in MULTICELL_SUPPORTED_TASKS, "Specified finetuning task is not yet supported."
+        assert top_k_genes > 0, "'top_k_genes' must be an integer > 0"
+        self.task = task
+        self.top_k_genes = top_k_genes
+        random.seed(random_seed)
+
+        self.prompts_dict = {}
+        if task == "tissue_prediction":
+            with open(HERE / "prompts/multi_cell_tissue_prediction_prompts.json", "r") as f:
+                self.prompts_dict = json.load(f)
+        elif task == "tissue_conditional_generation":
+            with open(HERE / "prompts/multi_cell_tissue_conditional_generation.json", "r") as f:
+                self.prompts_dict = json.load(f)
+    
+    def get_keys_for_task(self):
+        """
+        Depending on the task, this function will tell you what keys are supposed to be formatted in the
+        model input and model output.
+        """
+        if self.task == "tissue_prediction":
+            model_input_keys = ["num_genes", "num_cells", "organism", "multi_cell_sentences"]
+            response_keys = ["tissue"]
+        elif self.task == "tissue_conditional_generation":
+            model_input_keys = ["num_genes", "num_cells", "organism", "tissue"]
+            response_keys = ["multi_cell_sentences"]
+        
+        return model_input_keys, response_keys
+    
+    def format_hf_ds(self, hf_ds, multi_cell_indices_ds):
+        """
+        Helper function to loop through dataset samples, format prompts
+
+        Arguments:
+            hf_ds: Huggingface arrow dataset containing cell sentences to format prompts with.
+            multi_cell_indices_ds: Huggingface arrow dataset containing multi-cell indices,
+                indicating which cells are grouped together from the original dataset.
+        """
+        model_inputs_list = []
+        responses_list = []
+
+        # Get keys for model input and response which will need to be formatted
+        model_input_keys, response_keys = self.get_keys_for_task()
+
+        for cell_idx in range(multi_cell_indices_ds.num_rows):
+            multi_cell_sample = multi_cell_indices_ds[cell_idx]
+            multi_cell_indices = multi_cell_sample["multi_cell_groupings"]
+
+            # Build multi-cell string
+            multi_cell_str = ""
+            for idx, cell_idx in enumerate(multi_cell_indices):
+                sample = hf_ds[cell_idx]
+                multi_cell_str += f"Cell {idx + 1}:\n"
+                single_cell_sentence_str, _ = get_cell_sentence_str(sample, num_genes=self.top_k_genes)
+                multi_cell_str += single_cell_sentence_str
+                multi_cell_str += ".\n"
+            multi_cell_sample["multi_cell_sentences"] = multi_cell_str
+            multi_cell_sample["num_genes"] = self.top_k_genes
+            multi_cell_sample["num_cells"] = len(multi_cell_indices)
+
+            # Select an input prompt, format keys
+            model_input_str = random.choice(self.prompts_dict["model_input"])
+            model_input_str = model_input_str.format(**{key: multi_cell_sample[key] for key in model_input_keys})
+            
+            # Format key in response
+            response_str = self.prompts_dict["response"][0]  # 1 response template
+            response_str = response_str.format(**{key: multi_cell_sample[key] for key in response_keys})
+
+            model_inputs_list.append(model_input_str)
+            responses_list.append(response_str)
+
+        # Create formatted Huggingface dataset
+        ds_split_dict = {
+            "sample_type": [self.task] * multi_cell_indices_ds.num_rows,
             "model_input": model_inputs_list,
             "response": responses_list,
         }

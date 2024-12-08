@@ -1,0 +1,22 @@
+{
+    "model_input": [
+        "The following is a list of {num_genes} gene names ordered by descending expression level for {num_cells} different {organism} cells. Your task is to give the tissue which these cells belong to based on their gene expression.\nCell sentences:\n{multi_cell_sentences}.\nThe tissue which these cells belong to is:",
+        "Below is a list of {num_genes} genes in decreasing order of expression in {num_cells} {organism} cells. Given this, predict the tissue which these cells belongs to.\nCell sentences:\n{multi_cell_sentences}.\nThe tissue which these cells originate from is:",
+        "Listed below are the top {num_genes} expressed genes in decreasing order of expression for {num_cells} distinct {organism} cells. Based on this information, predict the tissue which these cells were taken from.\nCell sentences:\n{multi_cell_sentences}.\nThe most likely tissue of origin is:",
+        "Presented are the top {num_genes} genes by descending expression level from {num_cells} {organism} cells. Determine the tissue type these cells belong to.\nCell sentences:\n{multi_cell_sentences}.\nThe tissue type is:",
+        "This list shows {num_genes} genes ranked by descending expression in {num_cells} {organism} cells. Identify the tissue of origin for these cells based on their gene expression.\nCell sentences:\n{multi_cell_sentences}.\nOriginating tissue:",
+        "Provided below is an expression-ranked list of {num_genes} genes for {num_cells} different {organism} cells. Infer the tissue of origin for these cells.\nCell sentences:\n{multi_cell_sentences}.\nTissue of origin:",
+        "Here are the top {num_genes} expressed genes from {num_cells} distinct {organism} cells sorted by decreasing expression level. Predict the tissue type from this data.\nCell sentences:\n{multi_cell_sentences}.\nPredicted tissue type:",
+        "Review the following list of {num_genes} highly expressed genes in order of descending expression in {num_cells} {organism} cells. Your task is to deduce the tissue which these cells originate from.\nCell sentences:\n{multi_cell_sentences}.\nThe tissue type is:",
+        "Examine the top {num_genes} genes ordered by descending expression level in {num_cells} {organism} cells. Based on this information, determine the tissue of origin for these cells.\nCell sentences:\n{multi_cell_sentences}.\nThe tissue which these cells belong to is:",
+        "Here is a sequence of the highest expressed {num_genes} genes from {num_cells} different {organism} cells, ordered by descending expression. Can you determine the tissue type of these cells?\nCell sentences:\n{multi_cell_sentences}.\nTissue type prediction:",
+        "Consider these {num_genes} highly expressed genes, ordered by descending expression, from {num_cells} {organism} cells. Based on the information, your task is to predict the associated tissue type of these cells.\nCell sentences:\n{multi_cell_sentences}.\nPredicted tissue:",
+        "The following is a list of the top {num_genes} expressed genes from {num_cells} different {organism} cells, in descending order of expression. Using this information, determine the tissue origin of these cells.\nCell sentences:\n{multi_cell_sentences}.\nPredicted tissue type:",
+        "Given below are lists of the top {num_genes} genes ordered by decreasing expression for {num_cells} {organism} cells. Using this, predict which tissue these cells originate from.\nCell sentences:\n{multi_cell_sentences}.\nTissue of origin:",
+        "Presented below are the top {num_genes} genes, arranged by descending expression level, from {num_cells} different {organism} cells. Based on this information, identify which tissue these cells come from.\nCell sentences:\n{multi_cell_sentences}.\nTissue of origin:",
+        "Given below is a ranking of the top {num_genes} expressed genes in {num_cells} different {organism} cells, arranged in order of descending expression level. From this, identify the type of tissue these cells come from.\nCell sentences:\n{multi_cell_sentences}.\nRepresented tissue type:"
+    ],
+    "response": [
+        "{tissue}."
+    ]
+}

@@ -14,7 +14,7 @@ from typing import Optional
 
 # Third-party libraries
 import numpy as np
-from datasets import load_from_disk, DatasetDict
+from datasets import load_from_disk, DatasetDict, Dataset
 
 # Pytorch, Huggingface imports
 import torch
@@ -83,6 +83,7 @@ class CSModel():
         max_eval_samples: int = 500,
         data_split_indices_dict: Optional[dict] = None,
         prompt_formatter: Optional[PromptFormatter] = None,
+        multi_cell_indices_ds: Optional[Dataset] = None,
     ):
         """
         Fine tune a model using the provided CSData object data
@@ -104,7 +105,8 @@ class CSModel():
                                     should be a list of indices of samples in that data split.
             prompt_formatter: optional custom PromptFormatter object. If None, a default one
                             will be created using task and top_k_genes parameters.
-
+            multi_cell_indices_ds: optional Dataset object containing multi-cell indices, for
+                                    multi-cell prompting.
         Return:
             None: an updated CSModel is generated in-place
         """

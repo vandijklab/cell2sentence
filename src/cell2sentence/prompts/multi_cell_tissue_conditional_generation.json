@@ -1,0 +1,21 @@
+{
+    "model_input": [
+        "Generate a list of {num_genes} genes in order of descending expression for {num_cells} different {organism} cells from a {tissue} tissue.\nCell sentences:\n",
+        "Produce a list of {num_genes} gene names in order of descending expression for {num_cells} different {organism} cells originating from {tissue} tissue.\nCell sentences:",
+        "Generate a list of {num_genes} genes ranked by descending expression for {num_cells} distinct {organism} cells from a {tissue} tissue.\nCell sentences:",
+        "Compile a list of {num_genes} expressed genes sorted by decreasing expression levels for {num_cells} different {organism} cells originating from {tissue} tissue.\nCell sentences:",
+        "Create a descending order list of {num_genes} genes for {num_cells} different {organism} cells from {tissue} tissue based on their expression.\nCell sentences:",
+        "Produce a ranked list of {num_genes} genes by descending expression for {num_cells} individual {organism} cells originating from {tissue} tissue.\nCell sentences:",
+        "List {num_genes} genes in order of descending expression for {num_cells} separate {organism} cells from a {tissue} tissue.\nCell sentences:",
+        "Provide a list of {num_genes} gene names sorted by highest to lowest expression for {num_cells} {organism} cells from a {tissue} tissue.\nCell sentences:",
+        "Generate an ordered list of {num_genes} genes by descending expression levels for {num_cells} different {organism} cells originating from {tissue} tissue.\nCell sentences:",
+        "Create a gene list of {num_genes} gene names in descending order of expression for {num_cells} distinct {organism} cells taken from {tissue} tissue.\nCell sentences:",
+        "Formulate a list of {num_genes} genes ranked by decreasing expression for {num_cells} different {organism} cells from a {tissue} tissue sample.\nCell sentences:",
+        "Produce a list of {num_genes} genes sorted from highest to lowest expression for {num_cells} {organism} cells from a {tissue} tissue sample.\nCell sentences:",
+        "Compile a list of {num_genes} gene names in order of decreasing expression for {num_cells} individual {organism} cells originating from {tissue} tissue.\nCell sentences:",
+        "Create an ordered list of {num_genes} genes from most to least expressed for {num_cells} different {organism} cells from {tissue} tissue.\nCell sentences:"
+    ],
+    "response": [
+        "{multi_cell_sentences}."
+    ]
+}
