@@ -84,8 +84,7 @@ class CSModel():
         print("Using device:", self.device)
 
         # Create save path
-        if not os.path.exists(save_dir):
-            os.mkdir(save_dir)
+        os.makedirs(save_dir,exist_ok=True)
         self.save_path = os.path.join(save_dir, save_name)
 
         # Avoid mutable default for modules
