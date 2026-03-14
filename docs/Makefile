@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Minimal makefile for Sphinx documentation
 #
 
@@ -21,7 +20,7 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # Example: sphinx-build -M html docs/source/ docs/build/
-=======
+
 # Minimal makefile for Sphinx documentation
 #
 
@@ -44,4 +43,3 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # Example: sphinx-build -M html docs/source/ docs/build/
->>>>>>> 593fb74 (Peft feature implemented)

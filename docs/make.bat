@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @ECHO OFF
 
 pushd %~dp0
@@ -34,7 +33,7 @@ goto end
 
 :end
 popd
-=======
+
 @ECHO OFF
 
 pushd %~dp0
@@ -70,4 +69,3 @@ goto end
 
 :end
 popd
->>>>>>> 593fb74 (Peft feature implemented)

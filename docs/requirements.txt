@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 sphinx
-=======
-sphinx
->>>>>>> 593fb74 (Peft feature implemented)
 sphinx_rtd_theme
