@@ -86,7 +86,7 @@ The following notebooks provide guides on common workflows with C2S models. For 
 | [c2s_tutorial_4_cell_type_prediction.ipynb](tutorials/c2s_tutorial_4_cell_type_prediction.ipynb) | Cell type prediction using C2S models
 | [c2s_tutorial_5_cell_generation.ipynb](tutorials/c2s_tutorial_5_cell_generation.ipynb) | Cell generation conditioned on cell type
 | [c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb](tutorials/c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb) | Cell type annotation with foundation model
-| [c2s_tutorial_7_custom_prompt_templates.ipynb](tutorials/c2s_tutorials_7_custom_prompt_templates.ipynb) | Custom Prompt Templates with C2S PromptFormatter class
+| [c2s_tutorial_7_custom_prompt_templates.ipynb](tutorials/c2s_tutorial_7_custom_prompt_templates.ipynb) | Custom Prompt Templates with C2S PromptFormatter class
 | [c2s_tutorial_8_multi_cell_tissue_prediction.ipynb](tutorials/c2s_tutorial_8_multi_cell_tissue_prediction.ipynb) | Classifying the Tissue based on Multiple cell sentences
 | [c2s_tutorial_9_natural_language_interpretation.ipynb](tutorials/c2s_tutorial_9_natural_language_interpretation.ipynb) | Use the C2S model to generate insightful summaries for different sets of cells
 | [c2s_tutorial_10_perturbation_response_prediction.ipynb](tutorials/c2s_tutorial_10_perturbation_response_prediction.ipynb)| Use the C2S model to perform perturbation based on pre-cell sentences and treatment
