@@ -19,7 +19,7 @@ from datasets import load_from_disk, DatasetDict, Dataset
 # Pytorch, Huggingface imports
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
-from peft import LoraConfig, get_peft_model
+from peft import LoraConfig, get_peft_model, AutoPeftModelForCausalLM
 from huggingface_hub import login
 
 # Local imports
@@ -81,6 +81,7 @@ class CSModel():
         self.model_name_or_path = model_name_or_path  # path to model to load
         self.save_dir = save_dir
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.peft = peft
         print("Using device:", self.device)
 
         # Create save path
@@ -182,11 +183,18 @@ class CSModel():
 
         # Load model
         print("Reloading model from path on disk:", self.save_path)
-        model = AutoModelForCausalLM.from_pretrained(
-            self.save_path,
-            cache_dir=os.path.join(self.save_dir, ".cache"),
-            trust_remote_code=True
-        )
+        if not self.peft:
+            model = AutoModelForCausalLM.from_pretrained(
+                self.save_path,
+                cache_dir=os.path.join(self.save_dir, ".cache"),
+                trust_remote_code=True
+            )
+        else:
+            model = AutoPeftModelForCausalLM.from_pretrained(
+                self.save_path,
+                cache_dir=os.path.join(self.save_dir, ".cache"),
+                trust_remote_code=True
+            )
         model = model.to(self.device)
 
         # Tokenize data using LLM tokenizer
