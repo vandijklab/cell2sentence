@@ -14,7 +14,7 @@ import pytest
 # Pytorch, Huggingface
 from transformers import AutoModelForCausalLM
 from transformers.models.gpt_neox.modeling_gpt_neox import GPTNeoXForCausalLM
-
+from peft import PeftModel
 # Local imports
 import cell2sentence as cs
 from cell2sentence.csmodel import CSModel
@@ -66,5 +66,21 @@ class TestCSModelPeftModelLoadingAndErrorHandling:
         assert self.csmodel.save_path == os.path.join(self.save_dir, self.save_name)
     
     def test_layers_are_created_correctly(self):
-        model = AutoModelForCausalLM.from_pretrained(self.csmodel.save_path, trust_remote_code = True)
-        print(model)
+        from peft import PeftModel, AutoPeftModelForCausalLM
+        
+        # Load the model back from disk using PEFT's loading method
+        loaded_model = AutoPeftModelForCausalLM.from_pretrained(
+            self.csmodel.save_path,
+            trust_remote_code=True,
+            is_trainable=False
+        )
+        
+        # Verify it loaded as a PEFT model
+        assert isinstance(loaded_model, PeftModel), "Model is not a PeftModel"
+        
+        # Verify that LoRA layers are present in the loaded model
+        lora_modules = [name for name, module in loaded_model.named_modules() if "lora" in name.lower()]
+        assert len(lora_modules) > 0, "No LoRA layers found in the reloaded model modules"
+        
+        # Ensure the active adapter is set (typical for LoRA)
+        assert hasattr(loaded_model, "active_adapter"), "No active adapter found on the PEFT model"
