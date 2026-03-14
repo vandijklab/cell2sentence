@@ -47,7 +47,7 @@ git clone https://github.com/vandijklab/cell2sentence.git
 
 Navigate a terminal into the root of the repository. Next, create an Anaconda environment using `python3` using [anaconda](https://docs.anaconda.com/anaconda/install/) with:
 ```bash
-conda create -n cell2sentence python=3.8
+conda create -n cell2sentence python=3.10
 ```
 
 Next, activate the environment:
@@ -62,7 +62,7 @@ make install
 
 This will install the latest development environment of cell2sentence, along with other pacakge dependendies. You can also install cell2sentence itself using `pip`:
 ```bash
-pip install cell2sentence==1.1.0
+pip install cell2sentence==1.2.0
 ```
 
 The C2S package will allow usage of the core functionalities of C2S, including inference using existing C2S models and finetuning your own C2S models on your own datasets.
@@ -86,6 +86,7 @@ The following notebooks provide guides on common workflows with C2S models. For 
 | [c2s_tutorial_4_cell_type_prediction.ipynb](tutorials/c2s_tutorial_4_cell_type_prediction.ipynb) | Cell type prediction using C2S models
 | [c2s_tutorial_5_cell_generation.ipynb](tutorials/c2s_tutorial_5_cell_generation.ipynb) | Cell generation conditioned on cell type
 | [c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb](tutorials/c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb) | Cell type annotation with foundation model
+| [c2s_tutorial_7_custom_prompt_templates.ipynb](tutorials/c2s_tutorials_7_custom_prompt_templates.ipynb) | Custom Prompt Templates with C2S PromptFormatter class
 
 
 ## Model Zoo
