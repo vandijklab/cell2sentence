@@ -19,6 +19,8 @@ from datasets import load_from_disk, DatasetDict, Dataset
 # Pytorch, Huggingface imports
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
+from peft import LoraConfig, get_peft_model
+from huggingface_hub import login
 
 # Local imports
 from cell2sentence.prompt_formatter import PromptFormatter, C2SPromptFormatter
@@ -31,18 +33,51 @@ class CSModel():
     in cell2sentence based workflows.
     """
 
-    def __init__(self, model_name_or_path, save_dir, save_name):
+    def __init__(
+            self, 
+            model_name_or_path, 
+            save_dir, save_name, 
+            peft = False, 
+            r = 16,
+            alpha = 32,
+            modules = None,
+            bias = "none",
+            task_type = "CAUSAL_LM",
+            huggingface_token: Optional[str] = None
+    ):
         """
         Core constructor, CSModel class contains a path to a model.
 
         Arguments:
-            model_name_or_path: either a string representing a Huggingface model if 
-                want to start with a default LLM, or a path to an already-trained C2S
-                model on disk if want to do inference with/finetune starting from
-                an already-trained C2S model
-            save_dir: directory where model should be saved to
-            save_name: name to save model under (no file extension needed)
+            model_name_or_path (str): Huggingface model ID or local path to a pretrained model.
+            save_dir (str): Directory where model should be saved.
+            save_name (str): Name to save model under (no file extension needed).
+            peft (bool): Whether to enable parameter-efficient fine-tuning (PEFT/LoRA).
+                When True, LoRA adapters are configured and attached to the base model.
+            r (int): LoRA rank (must be > 0). Controls the low-rank decomposition
+                dimension for the adapter. A larger `r` increases adapter capacity.
+            alpha (int): LoRA alpha (must be > 0). Scaling factor applied to LoRA
+                updates; typically used together with `r` to control update magnitude.
+            modules (list[str] or None): List of target module name substrings to
+                apply LoRA to (e.g. ["q_proj", "k_proj", "v_proj", "o_proj"]).
+            bias (str): Bias handling passed to `LoraConfig` (common values: 'none',
+                'all', 'lora_only').
+            task_type (str): PEFT task type (e.g. 'CAUSAL_LM'). This is unrelated to
+                the higher-level C2S `task` used for prompt formatting.
+            huggingface_token (str or None): Optional HF token used to log in to the
+                Hugging Face hub when pushing or fetching private models.
+
+        Notes:
+            - When `peft=True`, `r` and `alpha` must be positive integers; passing
+              non-positive values should raise a `ValueError` so callers are not
+              silently corrected.
+            - `modules` defaults to common projection layer names but callers should
+              pass an explicit list if they plan to mutate it later (avoid
+              relying on mutable default arguments).
         """
+        if huggingface_token:
+            login(huggingface_token)
+        
         self.model_name_or_path = model_name_or_path  # path to model to load
         self.save_dir = save_dir
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -52,6 +87,10 @@ class CSModel():
         if not os.path.exists(save_dir):
             os.mkdir(save_dir)
         self.save_path = os.path.join(save_dir, save_name)
+
+        # Avoid mutable default for modules
+        if modules is None:
+            modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 
         # Load tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained(
@@ -66,6 +105,22 @@ class CSModel():
             cache_dir=os.path.join(save_dir, ".cache"),  # model file takes up several GB if loading default Huggignface LLM models
             trust_remote_code=True
         )
+
+        # Load parameter efficient model ready for training
+        if peft:
+            if r <= 0:
+                raise ValueError(f"The value of r <= 0; found r = {r}")
+            if alpha <= 0:
+                raise ValueError(f"The value of alpha <= 0; found alpha = {alpha}")
+            peft_config = LoraConfig(
+                r = r,
+                lora_alpha = alpha,
+                target_modules = modules,
+                bias = bias,
+                task_type = task_type
+            )
+            model = get_peft_model(model, peft_config)
+
         model.save_pretrained(self.save_path)
 
     def __str__(self):
@@ -213,7 +268,7 @@ class CSModel():
             data_collator=data_collator,
             train_dataset=train_dataset,
             eval_dataset=eval_dataset,
-            tokenizer=self.tokenizer
+            processing_class=self.tokenizer #changed argument from tokenizer to processing_class as per modern documentation
         )
         trainer.train()
         print(f"Finetuning completed. Updated model saved to disk at: {output_dir}")
