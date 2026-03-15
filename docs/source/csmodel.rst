@@ -1,5 +1,3 @@
-CSModel
-=======
 
 A CSModel object is a wrapper around a Cell2Sentence model, which tracks the path of the model 
 saved on disk. When needed, the model is loaded from the path on disk for inference or finetuning.
