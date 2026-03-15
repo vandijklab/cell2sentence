@@ -275,7 +275,7 @@ class CSModel():
             data_collator=data_collator,
             train_dataset=train_dataset,
             eval_dataset=eval_dataset,
-            processing_class=self.tokenizer #changed argument from tokenizer to processing_class as per modern documentation
+            tokenizer=self.tokenizer #changed argument from tokenizer to processing_class as per modern documentation
         )
         trainer.train()
         print(f"Finetuning completed. Updated model saved to disk at: {output_dir}")
