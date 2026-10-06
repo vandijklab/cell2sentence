@@ -117,7 +117,15 @@ each explain which model they use.
 ## License
 Licensed under the [Apache License 2.0](LICENSE).  
 
-See [NOTICE](NOTICE) for commercial inquiries and patent information.
+### Commercial inquiries and patent information
+
+The software in this repository is available under the Apache License, Version 2.0, including its patent-license provisions. This notice does not modify or restrict rights granted under that license.
+
+Related Cell2Sentence technology is described in U.S. Patent Application Publication No. US 2025/0139386 A1, assigned to Yale University. CellType Inc. holds an exclusive license to certain Yale University patent rights relating to this technology, subject to the terms of that agreement and applicable existing licenses.
+
+Implementations outside the scope of rights granted under the Apache License or other applicable licenses may require a separate patent license. For commercial collaborations and licensing inquiries, visit https://www.celltype.com/.
+
+This notice is also available in the [NOTICE](NOTICE) file.
 
 
 ## Cite Cell2Sentence
