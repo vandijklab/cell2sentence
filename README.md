@@ -117,6 +117,8 @@ each explain which model they use.
 ## License
 Licensed under the [Apache License 2.0](LICENSE).  
 
+See [NOTICE](NOTICE) for commercial inquiries and patent information.
+
 
 ## Cite Cell2Sentence
 
