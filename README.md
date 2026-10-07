@@ -3,7 +3,7 @@
 [![Code License: Apache 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
 [![PyPI version](https://badge.fury.io/py/cell2sentence.svg)](https://badge.fury.io/py/cell2sentence)
 [![DOI:10.1101/2025.04.14.648850](http://img.shields.io/badge/DOI-10.1101/2025.04.14.648850-B31B1B.svg)](https://doi.org/10.1101/2025.04.14.648850)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/release/python-31020/)
 
 ![cell2sentence workflow image](c2s_overview_figure.png)
 
@@ -47,7 +47,7 @@ git clone https://github.com/vandijklab/cell2sentence.git
 
 Navigate a terminal into the root of the repository. Next, create an Anaconda environment using `python3` using [anaconda](https://docs.anaconda.com/anaconda/install/) with:
 ```bash
-conda create -n cell2sentence python=3.8
+conda create -n cell2sentence python=3.10
 ```
 
 Next, activate the environment:
@@ -62,7 +62,7 @@ make install
 
 This will install the latest development environment of cell2sentence, along with other pacakge dependendies. You can also install cell2sentence itself using `pip`:
 ```bash
-pip install cell2sentence==1.1.0
+pip install cell2sentence==1.2.0
 ```
 
 The C2S package will allow usage of the core functionalities of C2S, including inference using existing C2S models and finetuning your own C2S models on your own datasets.
@@ -86,6 +86,10 @@ The following notebooks provide guides on common workflows with C2S models. For 
 | [c2s_tutorial_4_cell_type_prediction.ipynb](tutorials/c2s_tutorial_4_cell_type_prediction.ipynb) | Cell type prediction using C2S models
 | [c2s_tutorial_5_cell_generation.ipynb](tutorials/c2s_tutorial_5_cell_generation.ipynb) | Cell generation conditioned on cell type
 | [c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb](tutorials/c2s_tutorial_6_cell_annotation_with_foundation_model.ipynb) | Cell type annotation with foundation model
+| [c2s_tutorial_7_custom_prompt_templates.ipynb](tutorials/c2s_tutorial_7_custom_prompt_templates.ipynb) | Custom Prompt Templates with C2S PromptFormatter class
+| [c2s_tutorial_8_multi_cell_tissue_prediction.ipynb](tutorials/c2s_tutorial_8_multi_cell_tissue_prediction.ipynb) | Classifying the Tissue based on Multiple cell sentences
+| [c2s_tutorial_9_natural_language_interpretation.ipynb](tutorials/c2s_tutorial_9_natural_language_interpretation.ipynb) | Use the C2S model to generate insightful summaries for different sets of cells
+| [c2s_tutorial_10_perturbation_response_prediction.ipynb](tutorials/c2s_tutorial_10_perturbation_response_prediction.ipynb)| Use the C2S model to perform perturbation based on pre-cell sentences and treatment
 
 
 ## Model Zoo
@@ -111,7 +115,7 @@ each explain which model they use.
 - [x] Add tutorial notebooks for main C2S workflows: cell type prediction, cell generation
 - [x] Add multi-cell prompt formatting
 - [ ] Add support for legacy C2S-GPT-2 model prompts
-- [ ] Add parameter-efficient finetuning methods (LoRA)
+- [x] Add parameter-efficient finetuning methods (LoRA)
 
 
 ## License
